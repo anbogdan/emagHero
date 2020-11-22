@@ -1,5 +1,7 @@
 <?php
 
+namespace EmagHero;
+
 abstract class Player
 {
     private Stats $stats;
@@ -7,12 +9,5 @@ abstract class Player
     public function __construct($stats)
     {
         $this->stats = $stats;
-    }
-
-    public function getPower() {
-        if (isset($this->power)) {
-            return $this->power;
-        }
-        throw new Exception(get_class()." has no power set.");
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace EmagHero;
+
 abstract class Skill
 {
     abstract public function try();

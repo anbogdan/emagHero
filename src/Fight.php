@@ -1,15 +1,24 @@
 <?php
 
+namespace EmagHero;
+
 class Fight
 {
-    public function __construct()
-    {
+    private int $rounds;
 
+    public function __construct($rounds)
+    {
+        $this->rounds = $rounds;
+        $this->initStats();
     }
 
     private function initStats()
     {
-        $hero = new Hero(new Stats("../hero_stats.json"));
-        $monster = new Monster(new Stats("../monster_stats.json"));
+        $hero = new Hero(new Stats(realpath("config/hero_stats.json")));
+        $monster = new Monster(new Stats(realpath("config/monster_stats.json")));
+    }
+
+    public function start() {
+
     }
 }
