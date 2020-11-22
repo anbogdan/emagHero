@@ -10,4 +10,13 @@ abstract class Player
     {
         $this->stats = $stats;
     }
+
+    public function getStat($stat)
+    {
+        try {
+            return $this->stats->getStat($stat);
+        } catch (\Exception $e) {
+            exit(get_class().":".$e);
+        }
+    }
 }
