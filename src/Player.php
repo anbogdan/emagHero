@@ -4,7 +4,7 @@ namespace EmagHero;
 
 use Monolog\Logger;
 
-abstract class Player
+class Player
 {
     protected Stats $stats;
     protected Logger $logger;
@@ -66,5 +66,10 @@ abstract class Player
     public function applySkill(Skill $skill, $stat)
     {
         return $skill->try($stat);
+    }
+
+    public function __toString()
+    {
+        return "Player";
     }
 }
