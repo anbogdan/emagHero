@@ -10,7 +10,7 @@ class PlayerTest extends TestCase
     public function testTakeDamage()
     {
         $logger = MyLogger::getInstance();
-        $stats = new Stats(realpath("test_config.json"));
+        $stats = new Stats(realpath("tests/test_config.json"));
         $player = new Player($stats, $logger);
         $player->setStat("health", 100);
         $player->setStat("defence", 30);
@@ -21,7 +21,7 @@ class PlayerTest extends TestCase
     public function testTakeNegativeDamage()
     {
         $logger = MyLogger::getInstance();
-        $stats = new Stats(realpath("test_config.json"));
+        $stats = new Stats(realpath("tests/test_config.json"));
         $player = new Player($stats, $logger);
         $player->setStat("health", 100);
         $player->setStat("defence", 30);
@@ -33,7 +33,7 @@ class PlayerTest extends TestCase
     {
         /* Damage = Attacker strength – Defender defence */
         $logger = MyLogger::getInstance();
-        $stats = new Stats(realpath("test_config.json"));
+        $stats = new Stats(realpath("tests/test_config.json"));
         $player = new Player($stats, $logger);
         $player->setStat("health", 100);
         $player->setStat("defence", -20);
@@ -45,7 +45,7 @@ class PlayerTest extends TestCase
     {
         /* Damage = Attacker strength – Defender defence */
         $logger = MyLogger::getInstance();
-        $stats = new Stats(realpath("test_config.json"));
+        $stats = new Stats(realpath("tests/test_config.json"));
         $player = new Player($stats, $logger);
         $player->setStat("health", 100);
         $player->setStat("defence", -20);

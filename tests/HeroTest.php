@@ -10,7 +10,7 @@ class HeroTest extends TestCase
     public function testGetAttackIsInt()
     {
         $logger = MyLogger::getInstance();
-        $stats = new Stats(realpath("test_config.json"));
+        $stats = new Stats(realpath("tests/test_config.json"));
         $hero = new Hero($stats, $logger);
         $this->assertIsInt($hero->getAttack());
     }
@@ -18,7 +18,7 @@ class HeroTest extends TestCase
     public function testTakeDamageIsInt()
     {
         $logger = MyLogger::getInstance();
-        $stats = new Stats(realpath("test_config.json"));
+        $stats = new Stats(realpath("tests/test_config.json"));
         $hero = new Hero($stats, $logger);
         $value = 10.5;
         $this->assertIsInt($hero->takeDamage($value));

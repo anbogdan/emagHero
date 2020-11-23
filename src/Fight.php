@@ -26,37 +26,41 @@ class Fight
 
     public function start()
     {
-        $this->sortPlayers();
+        Fight::sortPlayers($this->players);
         $attackerIndex = 0;
         $countRounds = 0;
-        while($this->turns > 0) {
-            for($x = 0; $x < count($this->players) and $this->turns > 0; $x++) {
+        while($countRounds < $this->turns) {
+            for($x = 0; $x < count($this->players) and $countRounds < $this->turns; $x++) {
                 if($x == $attackerIndex) {
                     continue;
                 }
-                $this->logger->info("------------------- ROUND ".$countRounds." -------------------");
-                $attackDamage = $this->players[$attackerIndex]->getAttack();
-                $damageDone = $this->players[$x]->takeDamage($attackDamage);
-                $this->logger->info("Damage done: ".$damageDone);
-                if($this->players[$x]->getStat("health") < 0)
-                {
-                    $this->logger->info($this->players[$attackerIndex]." won because ".$this->players[$x].
-                        "'s health got below 0.");
-                    exit();
-                }
-                $this->logger->info("Defender's remaining health: ".$this->players[$x]->getStat("health"));
-                $this->turns -= 1;
+                $this->round($attackerIndex, $x, $countRounds);
                 $countRounds += 1;
             }
             $attackerIndex = ($attackerIndex + 1) % count($this->players);
         }
     }
 
-    private function sortPlayers() {
-        usort($this->players, array($this, "cmp"));
+    public function round($attacker, $defender, $number)
+    {
+        $this->logger->info("------------------- ROUND ".$number." -------------------");
+        $attackDamage = $this->players[$attacker]->getAttack();
+        $damageDone = $this->players[$defender]->takeDamage($attackDamage);
+        $this->logger->info("Damage done: ".$damageDone);
+        if($this->players[$defender]->getStat("health") < 0)
+        {
+            $this->logger->info($this->players[$attacker]." won because ".$this->players[$defender].
+                "'s health got below 0.");
+            exit();
+        }
+        $this->logger->info("Defender's remaining health: ".$this->players[$defender]->getStat("health"));
     }
 
-    private function cmp(Player $p1, Player $p2)
+    static public function sortPlayers($players) {
+        usort($players, array(Fight::class, "cmp"));
+    }
+
+    static private function cmp(Player $p1, Player $p2)
     {
         if ($p1->getStat("speed") == $p2->getStat("speed")) {
             if(($p1->getStat("luck") == $p2->getStat("speed"))) return 0;
