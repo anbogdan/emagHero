@@ -44,9 +44,31 @@ abstract class Player
     public function getAttack()
     {
         $this->logger->info($this." attacked.");
+        try {
+            return $this->stats->getStat("strength");
+        } catch (\Exception $e) {
+            exit(get_class($this).":".$e);
+        }
     }
     public function takeDamage($damage)
     {
+        if($this->getLucky()){
+            $this->logger->info($this." got lucky and received no damage.");
+            return 0;
+        }
         $this->logger->info($this." defended.");
+        try {
+            if($damage - $this->getStat("defence") < 0) return 0;
+            $this->setStat("health",
+                $this->getStat("health") - $damage + $this->getStat("defence"));
+        } catch (\Exception $e) {
+            exit(get_class($this).":".$e);
+        }
+        return $damage - $this->getStat("defence");
+    }
+
+    public function applySkill(Skill $skill, $stat)
+    {
+        return $skill->try($stat);
     }
 }
