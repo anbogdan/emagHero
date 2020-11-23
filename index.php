@@ -1,5 +1,9 @@
 <?php
 
+use EmagHero\MyLogger;
 require_once realpath('vendor/autoload.php');
 
-$fight = new EmagHero\Fight(20);
+$logger = MyLogger::getInstance();
+
+$fight = new EmagHero\Fight(20, $logger);
+$fight->start();

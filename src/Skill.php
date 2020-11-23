@@ -2,8 +2,8 @@
 
 namespace EmagHero;
 
-abstract class Skill
+interface Skill
 {
-    abstract public function try();
-    abstract public function execute();
+    function __construct($chance, $logger);
+    public function try($stat);
 }
