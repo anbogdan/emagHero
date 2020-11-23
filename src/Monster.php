@@ -8,4 +8,13 @@ class Monster extends Player
     {
         return "Monster";
     }
+
+    public function takeDamage($damage)
+    {
+        if($this->getLucky()){
+            $this->logger->info($this." got lucky and received no damage.");
+            return 0;
+        }
+        return parent::takeDamage($damage);
+    }
 }

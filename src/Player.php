@@ -52,10 +52,6 @@ abstract class Player
     }
     public function takeDamage($damage)
     {
-        if($this->getLucky()){
-            $this->logger->info($this." got lucky and received no damage.");
-            return 0;
-        }
         $this->logger->info($this." defended.");
         try {
             if($damage - $this->getStat("defence") < 0) return 0;

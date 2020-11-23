@@ -11,7 +11,7 @@ class Stats
         $config = file_get_contents($configLocation);
         $configJson = json_decode($config, true);
         foreach($configJson as $k => $v) {
-            $this->setProperty($k, floatval(mt_rand($v["min"], $v["max"])));
+            $this->setProperty($k, mt_rand($v["min"], $v["max"]));
         }
     }
 

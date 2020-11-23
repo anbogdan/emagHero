@@ -30,6 +30,10 @@ class Hero extends Player
 
     public function takeDamage($damage)
     {
+        if($this->getLucky()){
+            $this->logger->info($this." got lucky and received no damage.");
+            return 0;
+        }
         $attackDamage = $this->applySkill($this->magicShield, $damage);
         return parent::takeDamage($attackDamage);
     }
